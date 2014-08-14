@@ -19,6 +19,9 @@ function gameLoop() {
 }
 
 function drawBall() {
+  ctx.fillStyle = "rgba(223, 239, 255, 0.2)";
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
   ctx.beginPath();
   ctx.arc(ballX, ballY, radius, 0, 2 * Math.PI, false);
   ctx.fillStyle = '#0f0';
