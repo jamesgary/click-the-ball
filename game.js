@@ -10,7 +10,13 @@ var ballX = 200;
 var ballY = 150;
 var radius = 25;
 
-drawBall();
+gameLoop();
+
+function gameLoop() {
+  drawBall();
+  moveBall();
+  requestAnimationFrame(gameLoop);
+}
 
 function drawBall() {
   ctx.beginPath();
@@ -21,3 +27,15 @@ function drawBall() {
   ctx.strokeStyle = '#030';
   ctx.stroke();
 }
+
+function moveBall() {
+  var speed = 10;
+  ballX += (speed / 2) - Math.random() * speed;
+  ballY += (speed / 2) - Math.random() * speed;
+  ballX = clamp(ballX, 0, WIDTH);
+  ballY = clamp(ballY, 0, HEIGHT);
+}
+
+function clamp(num, min, max) {
+  return Math.min(Math.max(num, min), max);
+};
