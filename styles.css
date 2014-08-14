@@ -1,0 +1,16 @@
+body {
+  background: #8bf;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+canvas {
+  background: #def;
+  border: 1px solid black;
+  margin: auto;
+  display: block;
+}
