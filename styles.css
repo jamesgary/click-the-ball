@@ -19,4 +19,9 @@ h1 {
 canvas {
   background: #def;
   border: 1px solid black;
+  position: absolute;
+}
+
+canvas#game-effects {
+  background: transparent;
 }

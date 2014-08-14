@@ -3,22 +3,27 @@ var HEIGHT = 300;
 
 var container = document.getElementById("container");
 var canvas = document.getElementById("game");
+var effectsCanvas = document.getElementById("game-effects");
 
 var ctx = canvas.getContext("2d");
+var effectsCtx = effectsCanvas.getContext("2d");
+effectsCtx.font = "800 24pt Arial";
+effectsCtx.textAlign = "center";
 
 var ballX = 200;
 var ballY = 150;
 var xSpeed = 0;
 var ySpeed = 0;
 var radius = 25;
+var texts = [];
 
 container.addEventListener("click", function() {
   var mouseX = event.x - container.offsetLeft;
   var mouseY = event.y - container.offsetTop;
   if (distance(ballX, ballY, mouseX, mouseY) < radius) {
-    console.log("YAY");
+    texts.push({text: "YAY", x: mouseX, y: mouseY, r: 0, g: 255, b: 0, opacity: 1})
   } else {
-    console.log("BOO");
+    texts.push({text: "BOO", x: mouseX, y: mouseY, r: 255, g: 0, b: 0, opacity: 1})
   }
 });
 
@@ -26,6 +31,7 @@ gameLoop();
 
 function gameLoop() {
   drawBall();
+  drawText();
   moveBall();
   requestAnimationFrame(gameLoop);
 }
@@ -41,6 +47,23 @@ function drawBall() {
   ctx.lineWidth = 2;
   ctx.strokeStyle = '#030';
   ctx.stroke();
+}
+
+function drawText(text, x, y, r, g, b) {
+  effectsCtx.clearRect(0, 0, WIDTH, HEIGHT);
+  for (var i = 0; i < texts.length; i++) {
+    var t = texts[i];
+    effectsCtx.fillStyle = "rgba("+[t.r,t.g,t.b,t.opacity].join(',')+")";
+    effectsCtx.strokeStyle = "rgba("+[0,0,0,t.opacity].join(',')+")";
+    effectsCtx.fillText(t.text, t.x, t.y);
+    effectsCtx.strokeText(t.text, t.x, t.y);
+    t.y--;
+    t.opacity -= .04;
+    if (t.opacity <= 0) {
+      texts.splice(i, 1);
+      i--;
+    }
+  }
 }
 
 function moveBall() {
