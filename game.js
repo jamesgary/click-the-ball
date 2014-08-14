@@ -12,6 +12,16 @@ var xSpeed = 0;
 var ySpeed = 0;
 var radius = 25;
 
+container.addEventListener("click", function() {
+  var mouseX = event.x - container.offsetLeft;
+  var mouseY = event.y - container.offsetTop;
+  if (distance(ballX, ballY, mouseX, mouseY) < radius) {
+    console.log("YAY");
+  } else {
+    console.log("BOO");
+  }
+});
+
 gameLoop();
 
 function gameLoop() {
@@ -34,12 +44,6 @@ function drawBall() {
 }
 
 function moveBall() {
-  //var speed = 10;
-  //ballX += (speed / 2) - Math.random() * speed;
-  //ballY += (speed / 2) - Math.random() * speed;
-  //ballX = clamp(ballX, 0, WIDTH);
-  //ballY = clamp(ballY, 0, HEIGHT);
-
   var speedVariance = 1;
   var maxSpeed = 5;
   xSpeed += (speedVariance / 2) - (Math.random() * speedVariance);
@@ -62,3 +66,7 @@ function moveBall() {
 function clamp(num, min, max) {
   return Math.min(Math.max(num, min), max);
 };
+
+function distance(x1, y1, x2, y2) {
+  return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
