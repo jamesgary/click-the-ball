@@ -8,9 +8,20 @@ h1 {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+#container {
+  display: block;
+  height: 300px;
+  margin: auto;
+  width: 400px;
+  cursor: pointer;
+}
+
 canvas {
   background: #def;
   border: 1px solid black;
-  margin: auto;
-  display: block;
+  position: absolute;
+}
+
+canvas#game-effects {
+  background: transparent;
 }
